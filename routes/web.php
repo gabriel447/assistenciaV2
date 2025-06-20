@@ -30,6 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Rotas para Manutenções e Clientes
+    Route::get('/manutencoes', function () {
+        return view('manutencoes.index');
+    })->name('manutencoes.index');
+    
+    Route::resource('clientes', App\Http\Controllers\ClienteController::class);
 });
 
 require __DIR__.'/auth.php';
