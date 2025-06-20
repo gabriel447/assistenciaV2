@@ -15,8 +15,8 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <!-- DataTable Section -->
-        <div class="d-flex justify-content-center">
-            <div class="col-12 col-lg-10">
+        <div class="row">
+            <div class="col-12">
                 <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
                     <div class="card-header bg-white border-bottom" style="padding: 1.5rem;">
                         <div class="d-flex justify-content-between align-items-center">
