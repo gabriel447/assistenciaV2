@@ -18,7 +18,6 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-gray-900">Bem-vindo, {{ Auth::user()->name }}!</h3>
-                            <p class="text-gray-600">Tenha um ótimo trabalho hoje.</p>
                         </div>
                     </div>
                 </div>
