@@ -39,9 +39,39 @@
             }
             .dataTables_wrapper .dataTables_length select,
             .dataTables_wrapper .dataTables_filter input {
-                border: 1px solid #dee2e6;
-                border-radius: 0.375rem;
-                padding: 0.375rem 0.75rem;
+                border: 1px solid #e3e6f0;
+                border-radius: 0.6rem;
+                padding: 0.6rem 1rem;
+                background-color: #ffffff;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+                font-size: 0.9rem;
+                font-weight: 400;
+                color: #495057;
+                min-width: 250px;
+                height: 42px;
+            }
+            .dataTables_wrapper .dataTables_filter input:focus {
+                border: 1px solid #4e73df;
+                box-shadow: 0 0 0 2px rgba(78, 115, 223, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+                outline: none;
+                background-color: #fdfdfe;
+            }
+            .dataTables_wrapper .dataTables_filter input:hover {
+                border-color: #d1d3e2;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            }
+            .dataTables_wrapper .dataTables_filter input::placeholder {
+                color: #858796;
+                font-style: italic;
+            }
+            .dataTables_wrapper .dataTables_filter {
+                text-align: left !important;
+                float: left !important;
+            }
+            .dataTables_wrapper .dataTables_length {
+                text-align: right !important;
+                float: right !important;
             }
             .dataTables_wrapper .dataTables_paginate .paginate_button {
                 border-radius: 0.375rem;
