@@ -305,7 +305,9 @@
     }
 
     function editCliente(id) {
-        $.get('/clientes/' + id, function(data) {
+        $.get('/clientes/' + id, function(response) {
+            var data = response.cliente;
+            
             $('#clienteModalLabel').html('<i class="fas fa-user-edit me-2"></i>Editar Cliente');
             $('#clienteId').val(data.id);
             $('#nome').val(data.nome);
@@ -329,7 +331,16 @@
     }
 
     function showCliente(id) {
-        $.get('/clientes/' + id, function(data) {
+        $.get('/clientes/' + id, function(response) {
+            var data = response.cliente;
+            
+            // Formatar data de nascimento se existir
+            var dataNascimento = 'N/A';
+            if (data.data_nascimento) {
+                var date = new Date(data.data_nascimento);
+                dataNascimento = date.toLocaleDateString('pt-BR');
+            }
+            
             var content = `
                 <div class="row">
                     <div class="col-md-6">
@@ -342,7 +353,7 @@
                                 <p class="mb-2"><strong>CPF:</strong> ${data.cpf || 'N/A'}</p>
                                 <p class="mb-2"><strong>Email:</strong> ${data.email || 'N/A'}</p>
                                 <p class="mb-2"><strong>Contato:</strong> ${data.contato || 'N/A'}</p>
-                                <p class="mb-0"><strong>Data de Nascimento:</strong> ${data.data_nascimento || 'N/A'}</p>
+                                <p class="mb-0"><strong>Data de Nascimento:</strong> ${dataNascimento}</p>
                             </div>
                         </div>
                     </div>
