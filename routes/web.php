@@ -32,10 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     // Rotas para Manutenções e Clientes
-    Route::get('/manutencoes', function () {
-        return view('manutencoes.index');
-    })->name('manutencoes.index');
-    
+    Route::resource('manutencoes', App\Http\Controllers\ManutencaoController::class);
     Route::resource('clientes', App\Http\Controllers\ClienteController::class);
 });
 
