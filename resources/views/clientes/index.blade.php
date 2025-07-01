@@ -363,9 +363,9 @@
                                 <h6 class="card-title text-primary fw-bold mb-3">
                                     <i class="fas fa-map-marker-alt me-2"></i>Endereço
                                 </h6>
-                                <p class="mb-2"><strong>Rua:</strong> ${data.rua || 'N/A'}, ${data.numero || 'S/N'}</p>
+                                <p class="mb-2"><strong>Endereço:</strong> ${data.rua || 'N/A'}, ${data.numero || 'S/N'}</p>
                                 <p class="mb-2"><strong>Bairro:</strong> ${data.bairro || 'N/A'}</p>
-                                <p class="mb-2"><strong>Cidade:</strong> ${data.cidade || 'N/A'} - ${data.estado || 'N/A'}</p>
+                                <p class="mb-2"><strong>Cidade/Estado:</strong> ${data.cidade || 'N/A'} - ${data.estado || 'N/A'}</p>
                                 <p class="mb-2"><strong>CEP:</strong> ${data.cep || 'N/A'}</p>
                                 <p class="mb-0"><strong>Complemento:</strong> ${data.complemento || 'N/A'}</p>
                             </div>
