@@ -53,6 +53,107 @@
         </div>
     </div>
 
+    <!-- Modal de Detalhes -->
+    <div class="modal fade" id="detalhesModal" tabindex="-1" aria-labelledby="detalhesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="detalhesModalLabel">
+                        <i class="fas fa-tools me-2"></i>Detalhes da Manutenção
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Informações do Cliente -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="mb-0 fw-bold"><i class="fas fa-user me-2 text-primary"></i>Cliente</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-1"><strong>Nome:</strong> <span id="cliente-nome"></span></p>
+                                    <p class="mb-1"><strong>CPF:</strong> <span id="cliente-cpf"></span></p>
+                                    <p class="mb-1"><strong>Email:</strong> <span id="cliente-email"></span></p>
+                                    <p class="mb-0"><strong>Telefone:</strong> <span id="cliente-contato"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Informações do Aparelho -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="mb-0 fw-bold"><i class="fas fa-mobile-alt me-2 text-primary"></i>Aparelho</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-1"><strong>Tipo:</strong> <span id="aparelho-tipo"></span></p>
+                                    <p class="mb-1"><strong>Marca/Modelo:</strong> <span id="aparelho-marca-modelo"></span></p>
+                                    <p class="mb-1"><strong>Nº Série:</strong> <span id="aparelho-nserie"></span></p>
+                                    <p class="mb-0"><strong>Senha:</strong> <span id="aparelho-senha"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informações da Manutenção -->
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0 fw-bold"><i class="fas fa-wrench me-2 text-primary"></i>Manutenção</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2"><strong>Defeito:</strong> <span id="manutencao-defeito"></span></p>
+                                    <p class="mb-2"><strong>Serviço:</strong> <span id="manutencao-descricao"></span></p>
+                                    <p class="mb-0"><strong>Status:</strong> <span id="manutencao-status"></span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2"><strong>Data Entrada:</strong> <span id="manutencao-entrada"></span></p>
+                                    <p class="mb-0"><strong>Data Saída:</strong> <span id="manutencao-saida"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Valores -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0 fw-bold"><i class="fas fa-dollar-sign me-2 text-primary"></i>Valores</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="border-end">
+                                        <h6 class="text-muted mb-1">Mão de Obra</h6>
+                                        <h5 id="valor-maodeobra" class="text-info fw-bold mb-0"></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border-end">
+                                        <h6 class="text-muted mb-1">Peças</h6>
+                                        <h5 id="valor-pecas" class="text-danger fw-bold mb-0"></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Total</h6>
+                                        <h4 id="valor-total" class="text-success fw-bold mb-0"></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -99,9 +200,44 @@
             alert('Funcionalidade de criacao sera implementada em breve!');
         }
 
-        function viewManutencao(id) {
-            // Implementar visualizacao
-            alert('Visualizar manutencao ID: ' + id);
+        function showManutencao(id) {
+            // Fazer requisição AJAX para buscar detalhes da manutenção
+            $.ajax({
+                url: '/manutencoes/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Preencher dados do cliente
+                    $('#cliente-nome').text(data.cliente.nome);
+                    $('#cliente-cpf').text(data.cliente.cpf);
+                    $('#cliente-email').text(data.cliente.email);
+                    $('#cliente-contato').text(data.cliente.contato);
+                    
+                    // Preencher dados do aparelho
+                    $('#aparelho-marca-modelo').text(data.aparelho.marca + ' ' + data.aparelho.modelo);
+                    $('#aparelho-tipo').text(data.aparelho.tipo);
+                    $('#aparelho-nserie').text(data.aparelho.nserie);
+                    $('#aparelho-senha').text(data.aparelho.senha);
+                    
+                    // Preencher dados da manutenção
+                    $('#manutencao-defeito').text(data.defeito);
+                    $('#manutencao-descricao').text(data.descricao);
+                    $('#manutencao-status').text(data.status);
+                    $('#manutencao-entrada').text(data.data_entrada);
+                    $('#manutencao-saida').text(data.data_saida);
+                    
+                    // Preencher valores
+                    $('#valor-maodeobra').text(data.valor_maodeobra);
+                    $('#valor-pecas').text(data.valor_pecas);
+                    $('#valor-total').text(data.valor_total);
+                    
+                    // Mostrar o modal
+                    $('#detalhesModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    alert('Erro ao carregar detalhes da manutencao: ' + error);
+                }
+            });
         }
 
         function editManutencao(id) {

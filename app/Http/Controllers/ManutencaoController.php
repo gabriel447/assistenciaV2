@@ -79,4 +79,44 @@ class ManutencaoController extends Controller
 
         return view('manutencoes.index');
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $manutencao = Manutencao::with(['aparelho.cliente'])
+            ->findOrFail($id);
+
+        $aparelho = $manutencao->aparelho;
+        $cliente = $aparelho->cliente;
+
+        // Calcular data de saída ou previsão
+        $dataSaida = $manutencao->saida ? $manutencao->saida->format('d/m/Y') : 'Não definida';
+        
+        return response()->json([
+            'id' => $manutencao->id,
+            'cliente' => [
+                'nome' => $cliente->nome,
+                'cpf' => $cliente->cpf,
+                'email' => $cliente->email,
+                'contato' => $cliente->contato
+            ],
+            'aparelho' => [
+                'marca' => $aparelho->marca,
+                'modelo' => $aparelho->modelo,
+                'nserie' => $aparelho->nserie,
+                'tipo' => $aparelho->tipo,
+                'senha' => $aparelho->senha ?? 'Não informada'
+            ],
+            'defeito' => $manutencao->defeito,
+            'descricao' => $manutencao->descricao ?? 'Não informada',
+            'data_entrada' => $manutencao->entrada->format('d/m/Y'),
+            'data_saida' => $dataSaida,
+            'status' => ucfirst(str_replace('_', ' ', $manutencao->status)),
+            'valor_maodeobra' => 'R$ ' . number_format($manutencao->valor_maodeobra, 2, ',', '.'),
+            'valor_pecas' => 'R$ ' . number_format($manutencao->valor_pecas, 2, ',', '.'),
+            'valor_total' => 'R$ ' . number_format($manutencao->valor_total, 2, ',', '.')
+        ]);
+    }
 }
