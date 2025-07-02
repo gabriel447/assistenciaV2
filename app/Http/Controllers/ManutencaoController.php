@@ -34,6 +34,9 @@ class ManutencaoController extends Controller
                 ->addColumn('cliente_cpf', function ($manutencao) {
                     return $manutencao->aparelho->cliente->cpf ?? 'N/A';
                 })
+                ->addColumn('cliente_telefone', function ($manutencao) {
+                    return $manutencao->aparelho->cliente->contato ?? 'N/A';
+                })
                 ->addColumn('aparelho_info', function ($manutencao) {
                     $aparelho = $manutencao->aparelho;
                     return $aparelho ? "{$aparelho->marca} {$aparelho->modelo}" : 'N/A';
@@ -60,19 +63,15 @@ class ManutencaoController extends Controller
                     return $manutencao->entrada->format('d/m/Y');
                 })
                 ->addColumn('actions', function ($manutencao) {
-                    return '
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="viewManutencao(' . $manutencao->id . ')" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="editManutencao(' . $manutencao->id . ')" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteManutencao(' . $manutencao->id . ')" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    ';
+                    $btn = '<div class="btn-group" role="group">';
+                    $btn .= '<button type="button" onclick="showManutencao('.$manutencao->id.')" class="btn btn-secondary btn-sm" title="Ver detalhes">';
+                    $btn .= '<i class="fas fa-eye text-white"></i></button> ';
+                    $btn .= '<button type="button" onclick="editManutencao('.$manutencao->id.')" class="btn btn-warning btn-sm" title="Editar">';
+                    $btn .= '<i class="fas fa-edit"></i></button> ';
+                    $btn .= '<button type="button" onclick="deleteManutencao('.$manutencao->id.')" class="btn btn-danger btn-sm" title="Excluir">';
+                    $btn .= '<i class="fas fa-trash"></i></button>';
+                    $btn .= '</div>';
+                    return $btn;
                 })
                 ->rawColumns(['status_badge', 'actions'])
                 ->make(true);

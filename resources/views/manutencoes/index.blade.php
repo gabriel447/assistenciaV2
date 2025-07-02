@@ -35,11 +35,11 @@
                             <table id="manutencoesTable" class="table table-hover mb-0" style="font-size: 0.9rem;">
                                 <thead class="table-light">
                                     <tr>
-                                        <th class="border-0 fw-bold text-dark">Cliente</th>
+                                        <th class="border-0 fw-bold text-dark">Nome</th>
                                         <th class="border-0 fw-bold text-dark">CPF</th>
+                                        <th class="border-0 fw-bold text-dark">Contato</th>
                                         <th class="border-0 fw-bold text-dark">Aparelho</th>
                                         <th class="border-0 fw-bold text-dark">Defeito</th>
-                                        <th class="border-0 fw-bold text-dark">Data Entrada</th>
                                         <th class="border-0 fw-bold text-dark">Status</th>
                                         <th class="border-0 fw-bold text-dark">Valor Total</th>
                                         <th class="border-0 fw-bold text-dark text-center">Ações</th>
@@ -53,58 +53,68 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    @push('scripts')
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
     <script>
         $(document).ready(function() {
             $('#manutencoesTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: {
-                    url: '{{ route('manutencoes.index') }}',
-                    type: 'GET'
-                },
+                ajax: '{{ route("manutencoes.index") }}',
                 columns: [
                     { data: 'cliente_nome', name: 'cliente_nome' },
                     { data: 'cliente_cpf', name: 'cliente_cpf' },
+                    { data: 'cliente_telefone', name: 'cliente_telefone' },
                     { data: 'aparelho_info', name: 'aparelho_info' },
                     { data: 'defeito', name: 'defeito' },
-                    { data: 'data_entrada', name: 'data_entrada' },
                     { data: 'status_badge', name: 'status_badge', orderable: false },
                     { data: 'valor_formatado', name: 'valor_formatado' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
-                order: [[4, 'desc']], // Ordenar por data de entrada (mais recentes primeiro)
+                order: [[4, 'asc']], // Ordenar por defeito
                 pageLength: 25,
                 responsive: true,
-                dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rtip',
+                dom: '<"row"<"col-sm-12 col-md-6 text-left"f><"col-sm-12 col-md-6 text-right"l>>' +
+                     '<"row"<"col-sm-12"tr>>' +
+                     '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-BR.json',
-                    emptyTable: '<div class="text-center py-4"><i class="fas fa-tools fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhuma manutenção encontrada</h5><p class="text-muted mb-0">Não há manutenções cadastradas no sistema ainda.</p></div>',
-                    zeroRecords: '<div class="text-center py-4"><i class="fas fa-search fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhum resultado encontrado</h5><p class="text-muted mb-0">Tente ajustar os filtros de busca.</p></div>'
+                    emptyTable: '<div class="text-center py-4"><i class="fas fa-tools fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhuma manutencao encontrada</h5></div>',
+                    zeroRecords: '<div class="text-center py-4"><i class="fas fa-search fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhum resultado encontrado</h5></div>'
                 }
             });
         });
 
         function openCreateModal() {
-            // Implementar modal de criação
-            alert('Funcionalidade de criação será implementada em breve!');
+            // Implementar modal de criacao
+            alert('Funcionalidade de criacao sera implementada em breve!');
         }
 
         function viewManutencao(id) {
-            // Implementar visualização
-            alert('Visualizar manutenção ID: ' + id);
+            // Implementar visualizacao
+            alert('Visualizar manutencao ID: ' + id);
         }
 
         function editManutencao(id) {
-            // Implementar edição
-            alert('Editar manutenção ID: ' + id);
+            // Implementar edicao
+            alert('Editar manutencao ID: ' + id);
         }
 
         function deleteManutencao(id) {
-            // Implementar exclusão
-            if (confirm('Tem certeza que deseja excluir esta manutenção?')) {
-                alert('Excluir manutenção ID: ' + id);
+            // Implementar exclusao
+            if (confirm('Tem certeza que deseja excluir esta manutencao?')) {
+                alert('Excluir manutencao ID: ' + id);
             }
         }
     </script>
+    @endpush
 </x-app-layout>

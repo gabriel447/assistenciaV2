@@ -383,14 +383,14 @@
     }
 
     function deleteCliente(id) {
-        // Usar SweetAlert2 ou modal de confirmação Bootstrap
-        if (confirm('Tem certeza que deseja excluir este cliente?\n\nEsta ação não pode ser desfeita.')) {
+        // Usar SweetAlert2 ou modal de confirmacao Bootstrap
+        if (confirm('Tem certeza que deseja excluir este cliente?\n\nEsta acao nao pode ser desfeita.')) {
             $.ajax({
                 url: '/clientes/' + id,
                 method: 'DELETE',
                 success: function(response) {
                     $('#clientesTable').DataTable().ajax.reload();
-                    showToast('success', 'Cliente excluído com sucesso!');
+                    showToast('success', 'Cliente excluido com sucesso!');
                 },
                 error: function(xhr) {
                     showToast('error', 'Erro ao excluir cliente!');
