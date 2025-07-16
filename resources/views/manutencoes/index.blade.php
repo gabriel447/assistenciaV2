@@ -176,7 +176,7 @@
                     { data: 'cliente_cpf', name: 'cliente_cpf' },
                     { data: 'cliente_telefone', name: 'cliente_telefone' },
                     { data: 'aparelho_info', name: 'aparelho_info' },
-                    { data: 'defeito', name: 'defeito' },
+                    { data: 'defeito_relatado', name: 'defeito_relatado' },
                     { data: 'status_badge', name: 'status_badge', orderable: false },
                     { data: 'valor_formatado', name: 'valor_formatado' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }

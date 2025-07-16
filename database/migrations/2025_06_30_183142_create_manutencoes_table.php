@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('manutencoes', function (Blueprint $table) {
             $table->id();
+            $table->string('ordem_servico')->unique();
             $table->foreignId('aparelho_id')->constrained('aparelhos')->onDelete('cascade');
-            $table->text('defeito');
-            $table->date('entrada');
-            $table->date('saida')->nullable();
+            $table->text('defeito_relatado');
+            $table->date('data_entrada');
+            $table->date('data_saida')->nullable();
             $table->enum('status', ['aguardando', 'em_andamento', 'aguardando_pecas', 'pronto', 'entregue', 'cancelado'])->default('aguardando');
             $table->text('descricao')->nullable();
             $table->decimal('valor_total', 10, 2)->default(0);

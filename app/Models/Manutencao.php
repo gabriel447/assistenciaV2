@@ -12,10 +12,11 @@ class Manutencao extends Model
     protected $table = 'manutencoes';
 
     protected $fillable = [
+        'ordem_servico',
         'aparelho_id',
-        'defeito',
-        'entrada',
-        'saida',
+        'defeito_relatado',
+        'data_entrada',
+        'data_saida',
         'status',
         'descricao',
         'valor_total',
@@ -24,8 +25,8 @@ class Manutencao extends Model
     ];
 
     protected $casts = [
-        'entrada' => 'date',
-        'saida' => 'date',
+        'data_entrada' => 'date',
+        'data_saida' => 'date',
         'valor_total' => 'decimal:2',
         'valor_pecas' => 'decimal:2',
         'valor_maodeobra' => 'decimal:2'

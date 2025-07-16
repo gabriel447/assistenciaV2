@@ -19,9 +19,10 @@ class ManutencaoController extends Controller
             $manutencoes = Manutencao::with(['aparelho.cliente'])
                 ->select([
                     'manutencoes.id',
-                    'manutencoes.defeito',
-                    'manutencoes.entrada',
-                    'manutencoes.saida',
+                    'manutencoes.ordem_servico',
+                    'manutencoes.defeito_relatado',
+                    'manutencoes.data_entrada',
+                    'manutencoes.data_saida',
                     'manutencoes.status',
                     'manutencoes.valor_total',
                     'manutencoes.aparelho_id'
@@ -59,8 +60,8 @@ class ManutencaoController extends Controller
                 ->addColumn('valor_formatado', function ($manutencao) {
                     return 'R$ ' . number_format($manutencao->valor_total, 2, ',', '.');
                 })
-                ->addColumn('data_entrada', function ($manutencao) {
-                    return $manutencao->entrada->format('d/m/Y');
+                ->addColumn('data_entrada_formatada', function ($manutencao) {
+                    return $manutencao->data_entrada->format('d/m/Y');
                 })
                 ->addColumn('actions', function ($manutencao) {
                     $btn = '<div class="btn-group" role="group">';
@@ -92,7 +93,7 @@ class ManutencaoController extends Controller
         $cliente = $aparelho->cliente;
 
         // Calcular data de saída ou previsão
-        $dataSaida = $manutencao->saida ? $manutencao->saida->format('d/m/Y') : 'Não definida';
+        $dataSaida = $manutencao->data_saida ? $manutencao->data_saida->format('d/m/Y') : 'Não definida';
         
         return response()->json([
             'id' => $manutencao->id,
@@ -109,9 +110,9 @@ class ManutencaoController extends Controller
                 'tipo' => $aparelho->tipo,
                 'senha' => $aparelho->senha ?? 'Não informada'
             ],
-            'defeito' => $manutencao->defeito,
+            'defeito' => $manutencao->defeito_relatado,
             'descricao' => $manutencao->descricao ?? 'Não informada',
-            'data_entrada' => $manutencao->entrada->format('d/m/Y'),
+            'data_entrada' => $manutencao->data_entrada->format('d/m/Y'),
             'data_saida' => $dataSaida,
             'status' => ucfirst(str_replace('_', ' ', $manutencao->status)),
             'valor_maodeobra' => 'R$ ' . number_format($manutencao->valor_maodeobra, 2, ',', '.'),
