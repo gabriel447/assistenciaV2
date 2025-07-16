@@ -276,7 +276,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="data_entrada" class="form-label fw-semibold text-dark">Data de Entrada *</label>
-                                                    <input type="date" class="form-control" id="data_entrada" name="data_entrada" required>
+                                                    <input type="date" class="form-control" id="data_entrada" name="data_entrada" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -288,6 +288,7 @@
                                                         <option value="aguardando_pecas">Aguardando Peças</option>
                                                         <option value="pronto">Pronto</option>
                                                         <option value="entregue">Entregue</option>
+                                                        <option value="cancelado">Cancelado</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -477,6 +478,7 @@
                                                         <option value="aguardando_pecas">Aguardando Peças</option>
                                                         <option value="pronto">Pronto</option>
                                                         <option value="entregue">Entregue</option>
+                                                        <option value="cancelado">Cancelado</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -779,6 +781,9 @@
                             document.getElementById('edit_valor_pecas').value = manutencao.valor_pecas || '';
                             document.getElementById('edit_descricao').value = manutencao.descricao || '';
                             
+                            // Controlar habilitação do campo data_saida baseado no status
+                            toggleDataSaidaField();
+                            
                             // Abrir modal
                             const editModal = new bootstrap.Modal(document.getElementById('editModal'));
                             editModal.show();
@@ -872,6 +877,35 @@
                 alert('Excluir manutencao ID: ' + id);
             }
         }
+        
+        // Função para controlar habilitação do campo data_saida
+          function toggleDataSaidaField() {
+              const statusSelect = document.getElementById('edit_status');
+              const dataSaidaInput = document.getElementById('edit_data_saida');
+              
+              if (statusSelect.value === 'entregue') {
+                  // Só preencher com data atual se o campo estiver vazio
+                  if (!dataSaidaInput.value) {
+                      dataSaidaInput.value = new Date().toISOString().split('T')[0];
+                  }
+                  dataSaidaInput.disabled = false;
+                  dataSaidaInput.readOnly = true;
+                  dataSaidaInput.required = true;
+              } else {
+                  dataSaidaInput.disabled = true;
+                  dataSaidaInput.readOnly = false;
+                  dataSaidaInput.required = false;
+                  dataSaidaInput.value = ''; // Limpar o campo quando desabilitado
+              }
+          }
+        
+        // Event listener para mudança no status
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusSelect = document.getElementById('edit_status');
+            if (statusSelect) {
+                statusSelect.addEventListener('change', toggleDataSaidaField);
+            }
+        });
     </script>
     @endpush
 </x-app-layout>
