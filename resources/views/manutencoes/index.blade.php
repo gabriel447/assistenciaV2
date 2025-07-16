@@ -276,20 +276,16 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="data_entrada" class="form-label fw-semibold text-dark">Data de Entrada *</label>
-                                                    <input type="date" class="form-control" id="data_entrada" name="data_entrada" required readonly>
+                                                    <input type="date" class="form-control" id="data_entrada" name="data_entrada" required readonly disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="status" class="form-label fw-semibold text-dark">Status *</label>
-                                                    <select class="form-select" id="status" name="status" required>
-                                                        <option value="aguardando">Aguardando</option>
-                                                        <option value="em_andamento">Em Andamento</option>
-                                                        <option value="aguardando_pecas">Aguardando Peças</option>
-                                                        <option value="pronto">Pronto</option>
-                                                        <option value="entregue">Entregue</option>
-                                                        <option value="cancelado">Cancelado</option>
+                                                    <select class="form-select" id="status" name="status" required disabled>
+                                                        <option value="aguardando" selected>Aguardando Cliente</option>
                                                     </select>
+                                                    <input type="hidden" name="status" value="aguardando">
                                                 </div>
                                             </div>
                                         </div>
@@ -466,16 +462,16 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="edit_data_saida" class="form-label fw-semibold text-dark">Data de Saída</label>
-                                                    <input type="date" class="form-control" id="edit_data_saida" name="data_saida">
+                                                    <input type="date" class="form-control" id="edit_data_saida" name="data_saida" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="edit_status" class="form-label fw-semibold text-dark">Status *</label>
                                                     <select class="form-select" id="edit_status" name="status" required>
-                                                        <option value="aguardando">Aguardando</option>
-                                                        <option value="em_andamento">Em Andamento</option>
+                                                        <option value="aguardando">Aguardando Cliente</option>
                                                         <option value="aguardando_pecas">Aguardando Peças</option>
+                                                        <option value="em_andamento">Em Andamento</option>
                                                         <option value="pronto">Pronto</option>
                                                         <option value="entregue">Entregue</option>
                                                         <option value="cancelado">Cancelado</option>
@@ -883,7 +879,7 @@
               const statusSelect = document.getElementById('edit_status');
               const dataSaidaInput = document.getElementById('edit_data_saida');
               
-              if (statusSelect.value === 'entregue') {
+              if (statusSelect.value === 'entregue' || statusSelect.value === 'cancelado') {
                   // Só preencher com data atual se o campo estiver vazio
                   if (!dataSaidaInput.value) {
                       dataSaidaInput.value = new Date().toISOString().split('T')[0];

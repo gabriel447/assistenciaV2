@@ -92,7 +92,7 @@ class ManutencaoSeeder extends Seeder
                 'data_entrada' => Carbon::now()->subDays(6),
                 'data_saida' => null,
                 'status' => 'aguardando',
-                'descricao' => 'Aguardando aprovação do orçamento',
+                'descricao' => 'Aguardando Cliente - aprovação do orçamento',
                 'valor_total' => 300.00,
                 'valor_pecas' => 220.00,
                 'valor_maodeobra' => 80.00

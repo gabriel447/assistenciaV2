@@ -52,8 +52,17 @@ class ManutencaoController extends Controller
                         'cancelado' => 'danger'
                     ];
                     
+                    $statusTexts = [
+                        'aguardando' => 'Aguardando Cliente',
+                        'aguardando_pecas' => 'Aguardando Peças',
+                        'em_andamento' => 'Em Andamento',
+                        'pronto' => 'Pronto',
+                        'entregue' => 'Entregue',
+                        'cancelado' => 'Cancelado'
+                    ];
+                    
                     $color = $statusColors[$manutencao->status] ?? 'secondary';
-                    $statusText = ucfirst(str_replace('_', ' ', $manutencao->status));
+                    $statusText = $statusTexts[$manutencao->status] ?? ucfirst(str_replace('_', ' ', $manutencao->status));
                     
                     return "<span class='badge bg-{$color}'>{$statusText}</span>";
                 })
@@ -165,6 +174,16 @@ class ManutencaoController extends Controller
         // Calcular data de saída ou previsão
         $dataSaida = $manutencao->data_saida ? $manutencao->data_saida->format('d/m/Y') : 'Não definida';
         
+        // Mapeamento de status
+        $statusTexts = [
+            'aguardando' => 'Aguardando Cliente',
+            'aguardando_pecas' => 'Aguardando Peças',
+            'em_andamento' => 'Em Andamento',
+            'pronto' => 'Pronto',
+            'entregue' => 'Entregue',
+            'cancelado' => 'Cancelado'
+        ];
+        
         return response()->json([
             'id' => $manutencao->id,
             'cliente' => [
@@ -184,7 +203,7 @@ class ManutencaoController extends Controller
             'descricao' => $manutencao->descricao ?? 'Não informada',
             'data_entrada' => $manutencao->data_entrada->format('d/m/Y'),
             'data_saida' => $dataSaida,
-            'status' => ucfirst(str_replace('_', ' ', $manutencao->status)),
+            'status' => $statusTexts[$manutencao->status] ?? ucfirst(str_replace('_', ' ', $manutencao->status)),
             'valor_maodeobra' => 'R$ ' . number_format($manutencao->valor_maodeobra, 2, ',', '.'),
             'valor_pecas' => 'R$ ' . number_format($manutencao->valor_pecas, 2, ',', '.'),
             'valor_total' => 'R$ ' . number_format($manutencao->valor_total, 2, ',', '.')
