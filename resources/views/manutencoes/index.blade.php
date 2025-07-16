@@ -341,6 +341,195 @@
         </div>
     </div>
 
+    <!-- Modal de Edição de Manutenção -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="editModalLabel">
+                        <i class="fas fa-edit me-2"></i>Editar Manutenção
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editForm">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="edit_manutencao_id" name="manutencao_id">
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Coluna Esquerda: Cliente e Aparelho -->
+                            <div class="col-md-6">
+                                <!-- Seção Cliente -->
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-user me-2 text-primary"></i>Cliente</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="mb-0">
+                                            <label for="edit_cliente_id" class="form-label fw-semibold text-dark">Selecionar Cliente *</label>
+                                            <select class="form-select form-select-lg" id="edit_cliente_id" name="cliente_id" required>
+                                                <option value="">Selecione um cliente...</option>
+                                            </select>
+                                            <div class="invalid-feedback" id="edit-cliente-error">
+                                                Por favor, selecione um cliente.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Seção Aparelho -->
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-mobile-alt me-2 text-primary"></i>Aparelho</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_aparelho_tipo" class="form-label fw-semibold text-dark">Tipo *</label>
+                                                    <select class="form-select" id="edit_aparelho_tipo" name="aparelho_tipo" required>
+                                                        <option value="">Selecione o tipo...</option>
+                                                        <option value="Smartphone">Smartphone</option>
+                                                        <option value="Tablet">Tablet</option>
+                                                        <option value="Notebook">Notebook</option>
+                                                        <option value="Desktop">Desktop</option>
+                                                        <option value="Smartwatch">Smartwatch</option>
+                                                        <option value="Outro">Outro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_aparelho_marca" class="form-label fw-semibold text-dark">Marca *</label>
+                                                    <select class="form-select" id="edit_aparelho_marca" name="aparelho_marca" required>
+                                                        <option value="">Selecione a marca...</option>
+                                                        <option value="Apple">Apple</option>
+                                                        <option value="Dell">Dell</option>
+                                                        <option value="Samsung">Samsung</option>
+                                                        <option value="Motorola">Motorola</option>
+                                                        <option value="HP">HP</option>
+                                                        <option value="Lenovo">Lenovo</option>
+                                                        <option value="Xiaomi">Xiaomi</option>
+                                                        <option value="Positivo">Positivo</option>
+                                                        <option value="Asus">Asus</option>
+                                                        <option value="LG">LG</option>
+                                                        <option value="Huawei">Huawei</option>
+                                                        <option value="Acer">Acer</option>
+                                                        <option value="Outro">Outro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="edit_aparelho_modelo" class="form-label fw-semibold text-dark">Modelo *</label>
+                                                    <input type="text" class="form-control" id="edit_aparelho_modelo" name="aparelho_modelo" placeholder="Ex: iPhone 13, Galaxy S21, Dell Inspiron..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_aparelho_nserie" class="form-label fw-semibold text-dark">Nº Série</label>
+                                                    <input type="text" class="form-control" id="edit_aparelho_nserie" name="aparelho_nserie" placeholder="Número de série do aparelho">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_aparelho_senha" class="form-label fw-semibold text-dark">Senha/PIN</label>
+                                                    <input type="text" class="form-control" id="edit_aparelho_senha" name="aparelho_senha" placeholder="Senha ou PIN do aparelho">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-0">
+                                                    <label for="edit_aparelho_detalhes" class="form-label fw-semibold text-dark">Detalhes Adicionais</label>
+                                                    <textarea class="form-control" id="edit_aparelho_detalhes" name="aparelho_detalhes" rows="2" placeholder="Informações adicionais sobre o aparelho (cor, estado, acessórios, etc.)"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Coluna Direita: Manutenção -->
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm mb-3" style="height: calc(100% - 1rem);">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-wrench me-2 text-primary"></i>Manutenção</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_data_saida" class="form-label fw-semibold text-dark">Data de Saída</label>
+                                                    <input type="date" class="form-control" id="edit_data_saida" name="data_saida">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_status" class="form-label fw-semibold text-dark">Status *</label>
+                                                    <select class="form-select" id="edit_status" name="status" required>
+                                                        <option value="aguardando">Aguardando</option>
+                                                        <option value="em_andamento">Em Andamento</option>
+                                                        <option value="aguardando_pecas">Aguardando Peças</option>
+                                                        <option value="pronto">Pronto</option>
+                                                        <option value="entregue">Entregue</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="edit_defeito_relatado" class="form-label fw-semibold text-dark">Defeito Relatado *</label>
+                                            <textarea class="form-control" id="edit_defeito_relatado" name="defeito_relatado" rows="3" required placeholder="Descreva detalhadamente o problema relatado pelo cliente..."></textarea>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_valor_maodeobra" class="form-label fw-semibold text-dark">Valor Mão de Obra</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-success text-white">R$</span>
+                                                        <input type="number" class="form-control" id="edit_valor_maodeobra" name="valor_maodeobra" step="0.01" min="0" placeholder="0,00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="edit_valor_pecas" class="form-label fw-semibold text-dark">Valor Peças</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-success text-white">R$</span>
+                                                        <input type="number" class="form-control" id="edit_valor_pecas" name="valor_pecas" step="0.01" min="0" placeholder="0,00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-0">
+                                            <label for="edit_descricao" class="form-label fw-semibold text-dark">Descrição do Serviço</label>
+                                            <textarea class="form-control" id="edit_descricao" name="descricao" rows="4" placeholder="Descreva detalhadamente o serviço realizado, peças trocadas, testes realizados..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-save me-1"></i>Atualizar Manutenção
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -565,9 +754,117 @@
         }
 
         function editManutencao(id) {
-            // Implementar edicao
-            alert('Editar manutencao ID: ' + id);
+            // Primeiro carregar clientes, depois buscar dados da manutenção
+            carregarClientesEdit().then(() => {
+                // Buscar dados da manutenção após clientes carregados
+                fetch(`/manutencoes/${id}/edit`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const manutencao = data.manutencao;
+                            
+                            // Preencher campos do formulário
+                            document.getElementById('edit_manutencao_id').value = manutencao.id;
+                            document.getElementById('edit_cliente_id').value = manutencao.cliente_id;
+                            document.getElementById('edit_aparelho_tipo').value = manutencao.aparelho_tipo;
+                            document.getElementById('edit_aparelho_marca').value = manutencao.aparelho_marca;
+                            document.getElementById('edit_aparelho_modelo').value = manutencao.aparelho_modelo;
+                            document.getElementById('edit_aparelho_nserie').value = manutencao.aparelho_nserie || '';
+                            document.getElementById('edit_aparelho_senha').value = manutencao.aparelho_senha || '';
+                            document.getElementById('edit_aparelho_detalhes').value = manutencao.aparelho_detalhes || '';
+                            document.getElementById('edit_data_saida').value = manutencao.data_saida || '';
+                            document.getElementById('edit_status').value = manutencao.status;
+                            document.getElementById('edit_defeito_relatado').value = manutencao.defeito_relatado;
+                            document.getElementById('edit_valor_maodeobra').value = manutencao.valor_maodeobra || '';
+                            document.getElementById('edit_valor_pecas').value = manutencao.valor_pecas || '';
+                            document.getElementById('edit_descricao').value = manutencao.descricao || '';
+                            
+                            // Abrir modal
+                            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                            editModal.show();
+                        } else {
+                            alert('Erro ao carregar dados da manutenção');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Erro ao carregar dados da manutenção');
+                    });
+            });
         }
+        
+        function carregarClientesEdit() {
+            return fetch('/api/clientes')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('edit_cliente_id');
+                    select.innerHTML = '<option value="">Selecione um cliente...</option>';
+                    
+                    data.forEach(cliente => {
+                        const option = document.createElement('option');
+                        option.value = cliente.id;
+                        option.textContent = cliente.nome;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar clientes:', error);
+                });
+        }
+        
+        function validarClienteEdit() {
+            const clienteSelect = document.getElementById('edit_cliente_id');
+            const errorDiv = document.getElementById('edit-cliente-error');
+            
+            if (!clienteSelect.value) {
+                clienteSelect.classList.add('is-invalid');
+                errorDiv.style.display = 'block';
+                clienteSelect.focus();
+                clienteSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return false;
+            } else {
+                clienteSelect.classList.remove('is-invalid');
+                errorDiv.style.display = 'none';
+                return true;
+            }
+        }
+        
+        // Submissão do formulário de edição
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validarClienteEdit()) {
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const manutencaoId = document.getElementById('edit_manutencao_id').value;
+            
+            fetch(`/manutencoes/${manutencaoId}`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Fechar modal
+                    const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                    editModal.hide();
+                    
+                    // Recarregar a página ou atualizar a tabela
+                    location.reload();
+                } else {
+                    alert('Erro ao atualizar manutenção: ' + (data.message || 'Erro desconhecido'));
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao atualizar manutenção');
+            });
+        });
 
         function deleteManutencao(id) {
             // Implementar exclusao

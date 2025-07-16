@@ -190,4 +190,103 @@ class ManutencaoController extends Controller
             'valor_total' => 'R$ ' . number_format($manutencao->valor_total, 2, ',', '.')
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $manutencao = Manutencao::with(['aparelho.cliente'])
+            ->findOrFail($id);
+
+        $aparelho = $manutencao->aparelho;
+        $cliente = $aparelho->cliente;
+
+        return response()->json([
+            'success' => true,
+            'manutencao' => [
+                'id' => $manutencao->id,
+                'cliente_id' => $cliente->id,
+                'aparelho_tipo' => $aparelho->tipo,
+                'aparelho_marca' => $aparelho->marca,
+                'aparelho_modelo' => $aparelho->modelo,
+                'aparelho_nserie' => $aparelho->nserie,
+                'aparelho_senha' => $aparelho->senha,
+                'aparelho_detalhes' => $aparelho->detalhes,
+                'data_saida' => $manutencao->data_saida,
+                'status' => $manutencao->status,
+                'defeito_relatado' => $manutencao->defeito_relatado,
+                'valor_maodeobra' => $manutencao->valor_maodeobra,
+                'valor_pecas' => $manutencao->valor_pecas,
+                'descricao' => $manutencao->descricao
+            ]
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'aparelho_tipo' => 'required|string|max:50',
+            'aparelho_marca' => 'required|string|max:100',
+            'aparelho_modelo' => 'required|string|max:100',
+            'aparelho_nserie' => 'nullable|string|max:100',
+            'aparelho_senha' => 'nullable|string|max:50',
+            'aparelho_detalhes' => 'nullable|string|max:500',
+            'defeito_relatado' => 'required|string',
+            'data_saida' => 'nullable|date',
+            'status' => 'required|in:aguardando,em_andamento,aguardando_pecas,pronto,entregue',
+            'valor_maodeobra' => 'nullable|numeric|min:0',
+            'valor_pecas' => 'nullable|numeric|min:0',
+            'descricao' => 'nullable|string'
+        ]);
+
+        try {
+            $manutencao = Manutencao::with('aparelho')->findOrFail($id);
+            $aparelho = $manutencao->aparelho;
+
+            // Atualizar o aparelho
+            $aparelho->update([
+                'cliente_id' => $request->cliente_id,
+                'tipo' => $request->aparelho_tipo,
+                'marca' => $request->aparelho_marca,
+                'modelo' => $request->aparelho_modelo,
+                'nserie' => $request->aparelho_nserie,
+                'senha' => $request->aparelho_senha,
+                'detalhes' => $request->aparelho_detalhes
+            ]);
+
+            // Calcular valor total
+            $valorMaoDeObra = (float) ($request->valor_maodeobra ?? 0);
+            $valorPecas = (float) ($request->valor_pecas ?? 0);
+            $valorTotal = $valorMaoDeObra + $valorPecas;
+
+            // Atualizar a manutenção
+            $manutencao->update([
+                'defeito_relatado' => $request->defeito_relatado,
+                'data_saida' => $request->data_saida,
+                'status' => $request->status,
+                'valor_maodeobra' => $valorMaoDeObra,
+                'valor_pecas' => $valorPecas,
+                'valor_total' => $valorTotal,
+                'descricao' => $request->descricao
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Manutenção atualizada com sucesso!',
+                'manutencao' => $manutencao,
+                'aparelho' => $aparelho
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao atualizar manutenção: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
