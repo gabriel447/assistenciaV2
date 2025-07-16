@@ -213,7 +213,7 @@ class ManutencaoController extends Controller
                 'aparelho_nserie' => $aparelho->nserie,
                 'aparelho_senha' => $aparelho->senha,
                 'aparelho_detalhes' => $aparelho->detalhes,
-                'data_saida' => $manutencao->data_saida,
+                'data_saida' => $manutencao->data_saida ? $manutencao->data_saida->format('Y-m-d') : null,
                 'status' => $manutencao->status,
                 'defeito_relatado' => $manutencao->defeito_relatado,
                 'valor_maodeobra' => $manutencao->valor_maodeobra,
