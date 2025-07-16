@@ -57,7 +57,7 @@
     <div class="modal fade" id="detalhesModal" tabindex="-1" aria-labelledby="detalhesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
+                <div class="modal-header bg-secondary text-white">
                     <h5 class="modal-title" id="detalhesModalLabel">
                         <i class="fas fa-tools me-2"></i>Detalhes da Manutenção
                     </h5>
@@ -158,7 +158,7 @@
     <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header bg-success text-white">
+                <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="cadastroModalLabel">
                         <i class="fas fa-plus me-2"></i>Nova Manutenção
                     </h5>
@@ -345,7 +345,7 @@
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header bg-warning text-dark">
+                <div class="modal-header bg-warning text-white">
                     <h5 class="modal-title" id="editModalLabel">
                         <i class="fas fa-edit me-2"></i>Editar Manutenção
                     </h5>

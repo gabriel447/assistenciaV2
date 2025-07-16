@@ -166,7 +166,7 @@
     <div class="modal fade" id="detalhesModal" tabindex="-1" aria-labelledby="detalhesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-primary text-white">
+                <div class="modal-header bg-secondary text-white">
                     <h5 class="modal-title fw-bold" id="detalhesModalLabel">
                         <i class="fas fa-user me-2"></i>Detalhes do Cliente
                     </h5>
@@ -294,12 +294,16 @@
         $('#clienteModal').on('hidden.bs.modal', function() {
             $('#clienteForm')[0].reset();
             $('#clienteId').val('');
+            // Restaurar cor original (primary) e título para cadastro
+            $('#clienteModal .modal-header').removeClass('bg-warning').addClass('bg-primary');
             $('#clienteModalLabel').html('<i class="fas fa-user-plus me-2"></i>Cadastrar Cliente');
         });
     });
 
     // Funções globais
     function openCreateModal() {
+        // Garantir que o modal está com a cor correta para criação (primary)
+        $('#clienteModal .modal-header').removeClass('bg-warning').addClass('bg-primary');
         var modal = new bootstrap.Modal(document.getElementById('clienteModal'));
         modal.show();
     }
@@ -308,6 +312,8 @@
         $.get('/clientes/' + id, function(response) {
             var data = response.cliente;
             
+            // Mudar cor do header para warning (amarelo) e título para edição
+            $('#clienteModal .modal-header').removeClass('bg-primary').addClass('bg-warning');
             $('#clienteModalLabel').html('<i class="fas fa-user-edit me-2"></i>Editar Cliente');
             $('#clienteId').val(data.id);
             $('#nome').val(data.nome);
