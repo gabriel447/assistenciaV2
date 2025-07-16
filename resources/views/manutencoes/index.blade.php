@@ -154,6 +154,193 @@
         </div>
     </div>
 
+    <!-- Modal de Cadastro de Manutenção -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="cadastroModalLabel">
+                        <i class="fas fa-plus me-2"></i>Nova Manutenção
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="cadastroForm">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Coluna Esquerda: Cliente e Aparelho -->
+                            <div class="col-md-6">
+                                <!-- Seção Cliente -->
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-user me-2 text-primary"></i>Cliente</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="mb-0">
+                                            <label for="cliente_id" class="form-label fw-semibold text-dark">Selecionar Cliente *</label>
+                                            <select class="form-select form-select-lg" id="cliente_id" name="cliente_id" required>
+                                                <option value="">Selecione um cliente...</option>
+                                            </select>
+                                            <div class="invalid-feedback" id="cliente-error">
+                                                Por favor, selecione um cliente.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Seção Aparelho -->
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-mobile-alt me-2 text-primary"></i>Aparelho</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="aparelho_tipo" class="form-label fw-semibold text-dark">Tipo *</label>
+                                                    <select class="form-select" id="aparelho_tipo" name="aparelho_tipo" required>
+                                                        <option value="">Selecione o tipo...</option>
+                                                        <option value="Smartphone">Smartphone</option>
+                                                        <option value="Tablet">Tablet</option>
+                                                        <option value="Notebook">Notebook</option>
+                                                        <option value="Desktop">Desktop</option>
+                                                        <option value="Smartwatch">Smartwatch</option>
+                                                        <option value="Outro">Outro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="aparelho_marca" class="form-label fw-semibold text-dark">Marca *</label>
+                                                    <select class="form-select" id="aparelho_marca" name="aparelho_marca" required>
+                                                        <option value="">Selecione a marca...</option>
+                                                        <option value="Apple">Apple</option>
+                                                        <option value="Dell">Dell</option>
+                                                        <option value="Samsung">Samsung</option>
+                                                        <option value="Motorola">Motorola</option>
+                                                        <option value="HP">HP</option>
+                                                        <option value="Lenovo">Lenovo</option>
+                                                        <option value="Xiaomi">Xiaomi</option>
+                                                        <option value="Positivo">Positivo</option>
+                                                        <option value="Asus">Asus</option>
+                                                        <option value="LG">LG</option>
+                                                        <option value="Huawei">Huawei</option>
+                                                        <option value="Acer">Acer</option>
+                                                        <option value="Outro">Outro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="aparelho_modelo" class="form-label fw-semibold text-dark">Modelo *</label>
+                                                    <input type="text" class="form-control" id="aparelho_modelo" name="aparelho_modelo" placeholder="Ex: iPhone 13, Galaxy S21, Dell Inspiron..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="aparelho_nserie" class="form-label fw-semibold text-dark">Nº Série</label>
+                                                    <input type="text" class="form-control" id="aparelho_nserie" name="aparelho_nserie" placeholder="Número de série do aparelho">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="aparelho_senha" class="form-label fw-semibold text-dark">Senha/PIN</label>
+                                                    <input type="text" class="form-control" id="aparelho_senha" name="aparelho_senha" placeholder="Senha ou PIN do aparelho">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-0">
+                                                    <label for="aparelho_detalhes" class="form-label fw-semibold text-dark">Detalhes Adicionais</label>
+                                                    <textarea class="form-control" id="aparelho_detalhes" name="aparelho_detalhes" rows="2" placeholder="Informações adicionais sobre o aparelho (cor, estado, acessórios, etc.)"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Coluna Direita: Manutenção -->
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm mb-3" style="height: calc(100% - 1rem);">
+                                    <div class="card-header bg-light py-2">
+                                        <h6 class="mb-0 fw-bold"><i class="fas fa-wrench me-2 text-primary"></i>Manutenção</h6>
+                                    </div>
+                                    <div class="card-body py-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="data_entrada" class="form-label fw-semibold text-dark">Data de Entrada *</label>
+                                                    <input type="date" class="form-control" id="data_entrada" name="data_entrada" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="status" class="form-label fw-semibold text-dark">Status *</label>
+                                                    <select class="form-select" id="status" name="status" required>
+                                                        <option value="aguardando">Aguardando</option>
+                                                        <option value="em_andamento">Em Andamento</option>
+                                                        <option value="aguardando_pecas">Aguardando Peças</option>
+                                                        <option value="pronto">Pronto</option>
+                                                        <option value="entregue">Entregue</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="defeito_relatado" class="form-label fw-semibold text-dark">Defeito Relatado *</label>
+                                            <textarea class="form-control" id="defeito_relatado" name="defeito_relatado" rows="3" required placeholder="Descreva detalhadamente o problema relatado pelo cliente..."></textarea>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="valor_maodeobra" class="form-label fw-semibold text-dark">Valor Mão de Obra</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-success text-white">R$</span>
+                                                        <input type="number" class="form-control" id="valor_maodeobra" name="valor_maodeobra" step="0.01" min="0" placeholder="0,00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="valor_pecas" class="form-label fw-semibold text-dark">Valor Peças</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-success text-white">R$</span>
+                                                        <input type="number" class="form-control" id="valor_pecas" name="valor_pecas" step="0.01" min="0" placeholder="0,00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-0">
+                                            <label for="descricao" class="form-label fw-semibold text-dark">Descrição do Serviço</label>
+                                            <textarea class="form-control" id="descricao" name="descricao" rows="4" placeholder="Descreva detalhadamente o serviço realizado, peças trocadas, testes realizados..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i>Salvar Manutenção
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -196,9 +383,146 @@
         });
 
         function openCreateModal() {
-            // Implementar modal de criacao
-            alert('Funcionalidade de criacao sera implementada em breve!');
+            // Limpar formulário
+            $('#cadastroForm')[0].reset();
+            
+            // Definir data de entrada como hoje
+            $('#data_entrada').val(new Date().toISOString().split('T')[0]);
+            
+            // Carregar clientes
+            carregarClientes();
+            
+            // Mostrar modal
+            $('#cadastroModal').modal('show');
         }
+        
+        function carregarClientes() {
+            $.ajax({
+                url: '/api/clientes',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var select = $('#cliente_id');
+                    select.empty();
+                    select.append('<option value="">Selecione um cliente...</option>');
+                    
+                    $.each(data, function(index, cliente) {
+                        select.append('<option value="' + cliente.id + '">' + cliente.nome + ' - ' + cliente.cpf + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao carregar clientes:', error);
+                    alert('Erro ao carregar lista de clientes');
+                }
+            });
+        }
+        
+
+        
+        // Validação do cliente antes do envio
+        function validarCliente() {
+            var clienteId = $('#cliente_id').val();
+            var clienteSelect = $('#cliente_id');
+            var errorDiv = $('#cliente-error');
+            
+            if (!clienteId || clienteId === '') {
+                clienteSelect.addClass('is-invalid');
+                errorDiv.show();
+                return false;
+            } else {
+                clienteSelect.removeClass('is-invalid');
+                errorDiv.hide();
+                return true;
+            }
+        }
+        
+        // Remover validação quando cliente for selecionado
+        $('#cliente_id').on('change', function() {
+            if ($(this).val()) {
+                $(this).removeClass('is-invalid');
+                $('#cliente-error').hide();
+            }
+        });
+        
+        // Submissão do formulário de cadastro
+        $(document).on('submit', '#cadastroForm', function(e) {
+            e.preventDefault();
+            
+            // Validar se cliente foi selecionado
+            if (!validarCliente()) {
+                // Scroll para o campo cliente
+                $('html, body').animate({
+                    scrollTop: $('#cliente_id').offset().top - 100
+                }, 500);
+                
+                // Focar no campo cliente
+                $('#cliente_id').focus();
+                
+                // Mostrar alerta
+                alert('Por favor, selecione um cliente antes de continuar.');
+                return false;
+            }
+            
+            var formData = {
+                cliente_id: $('#cliente_id').val(),
+                aparelho: {
+                    tipo: $('#aparelho_tipo').val(),
+                    marca: $('#aparelho_marca').val(),
+                    modelo: $('#aparelho_modelo').val(),
+                    nserie: $('#aparelho_nserie').val(),
+                    senha: $('#aparelho_senha').val(),
+                    detalhes: $('#aparelho_detalhes').val()
+                },
+                manutencao: {
+                    defeito_relatado: $('#defeito_relatado').val(),
+                    data_entrada: $('#data_entrada').val(),
+                    status: $('#status').val(),
+                    valor_maodeobra: $('#valor_maodeobra').val(),
+                    valor_pecas: $('#valor_pecas').val(),
+                    descricao: $('#descricao').val()
+                },
+                _token: $('meta[name="csrf-token"]').attr('content')
+            };
+            
+            // Desabilitar botão de envio para evitar duplo clique
+            var submitBtn = $(this).find('button[type="submit"]');
+            submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Salvando...');
+            
+            $.ajax({
+                url: '{{ route("manutencoes.store") }}',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    $('#cadastroModal').modal('hide');
+                    $('#manutencoesTable').DataTable().ajax.reload();
+                    
+                    // Mostrar mensagem de sucesso
+                    alert('Manutenção cadastrada com sucesso!');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao cadastrar manutenção:', xhr.responseText);
+                    
+                    if (xhr.status === 422) {
+                        // Erros de validação
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = 'Erros de validação:\n';
+                        
+                        $.each(errors, function(field, messages) {
+                            errorMessage += '- ' + messages.join(', ') + '\n';
+                        });
+                        
+                        alert(errorMessage);
+                    } else {
+                        alert('Erro ao cadastrar manutenção: ' + error);
+                    }
+                },
+                complete: function() {
+                    // Reabilitar botão de envio
+                    submitBtn.prop('disabled', false).html('<i class="fas fa-save me-1"></i>Salvar Manutenção');
+                }
+            });
+        });
 
         function showManutencao(id) {
             // Fazer requisição AJAX para buscar detalhes da manutenção

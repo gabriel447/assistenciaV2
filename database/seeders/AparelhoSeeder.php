@@ -34,7 +34,7 @@ class AparelhoSeeder extends Seeder
             [
                 'cliente_id' => $clientes->first()->id,
                 'marca' => 'Apple',
-                'modelo' => 'MacBook Pro',
+                'modelo' => 'MacBook Pro M1',
                 'nserie' => 'MBP2021001',
                 'tipo' => 'Notebook',
                 'senha' => 'admin123',
@@ -42,8 +42,8 @@ class AparelhoSeeder extends Seeder
             ],
             [
                 'cliente_id' => $clientes->skip(1)->first()->id,
-                'marca' => 'iPhone',
-                'modelo' => '12 Pro',
+                'marca' => 'Apple',
+                'modelo' => 'iPhone 12 Pro',
                 'nserie' => 'IP12P789012',
                 'tipo' => 'Smartphone',
                 'senha' => '0000',
@@ -70,7 +70,7 @@ class AparelhoSeeder extends Seeder
             [
                 'cliente_id' => $clientes->skip(3)->first()->id,
                 'marca' => 'HP',
-                'modelo' => 'Pavilion',
+                'modelo' => 'Pavilion Gaming',
                 'nserie' => 'HP567890',
                 'tipo' => 'Desktop',
                 'senha' => 'hp123',
@@ -79,7 +79,7 @@ class AparelhoSeeder extends Seeder
             [
                 'cliente_id' => $clientes->skip(4)->first()->id,
                 'marca' => 'Motorola',
-                'modelo' => 'Moto G9',
+                'modelo' => 'Moto G9 Plus',
                 'nserie' => 'MG9012345',
                 'tipo' => 'Smartphone',
                 'senha' => '1111',
@@ -88,7 +88,7 @@ class AparelhoSeeder extends Seeder
             [
                 'cliente_id' => $clientes->skip(4)->first()->id,
                 'marca' => 'Lenovo',
-                'modelo' => 'ThinkPad',
+                'modelo' => 'ThinkPad X1 Carbon',
                 'nserie' => 'TP678901',
                 'tipo' => 'Notebook',
                 'senha' => 'think123',

@@ -82,6 +82,76 @@ class ManutencaoController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'aparelho.tipo' => 'required|string|max:50',
+            'aparelho.marca' => 'required|string|max:100',
+            'aparelho.modelo' => 'required|string|max:100',
+            'aparelho.nserie' => 'nullable|string|max:100',
+            'aparelho.senha' => 'nullable|string|max:50',
+            'aparelho.detalhes' => 'nullable|string|max:500',
+            'manutencao.defeito_relatado' => 'required|string',
+            'manutencao.data_entrada' => 'required|date',
+            'manutencao.status' => 'required|in:aguardando,em_andamento,aguardando_pecas,pronto,entregue',
+            'manutencao.valor_maodeobra' => 'nullable|numeric|min:0',
+            'manutencao.valor_pecas' => 'nullable|numeric|min:0',
+            'manutencao.descricao' => 'nullable|string',
+            'manutencao.ordem_servico' => 'nullable|string|max:50'
+        ]);
+
+        try {
+            // Criar o aparelho
+            $aparelho = Aparelho::create([
+                'cliente_id' => $request->cliente_id,
+                'tipo' => $request->aparelho['tipo'],
+                'marca' => $request->aparelho['marca'],
+                'modelo' => $request->aparelho['modelo'],
+                'nserie' => $request->aparelho['nserie'],
+                'senha' => $request->aparelho['senha'],
+                'detalhes' => $request->aparelho['detalhes']
+            ]);
+
+            // Gerar ordem de serviço se não fornecida
+            $ordemServico = $request->manutencao['ordem_servico'] ?? 'OS' . date('Ymd') . str_pad($aparelho->id, 4, '0', STR_PAD_LEFT);
+
+            // Calcular valor total
+            $valorMaoDeObra = (float) ($request->manutencao['valor_maodeobra'] ?? 0);
+            $valorPecas = (float) ($request->manutencao['valor_pecas'] ?? 0);
+            $valorTotal = $valorMaoDeObra + $valorPecas;
+
+            // Criar a manutenção
+            $manutencao = Manutencao::create([
+                'aparelho_id' => $aparelho->id,
+                'ordem_servico' => $ordemServico,
+                'defeito_relatado' => $request->manutencao['defeito_relatado'],
+                'data_entrada' => $request->manutencao['data_entrada'],
+                'status' => $request->manutencao['status'],
+                'valor_maodeobra' => $valorMaoDeObra,
+                'valor_pecas' => $valorPecas,
+                'valor_total' => $valorTotal,
+                'descricao' => $request->manutencao['descricao']
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Manutenção cadastrada com sucesso!',
+                'manutencao' => $manutencao,
+                'aparelho' => $aparelho
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao cadastrar manutenção: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show($id)

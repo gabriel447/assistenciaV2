@@ -117,4 +117,26 @@ class ClienteController extends Controller
             'message' => 'Cliente deletado com sucesso!'
         ]);
     }
+
+    /**
+     * API: Lista todos os clientes para select
+     */
+    public function apiIndex(): JsonResponse
+    {
+        $clientes = Cliente::select(['id', 'nome', 'cpf'])
+            ->orderBy('nome')
+            ->get();
+
+        return response()->json($clientes);
+    }
+
+    /**
+     * API: Busca um cliente específico
+     */
+    public function apiShow($id): JsonResponse
+    {
+        $cliente = Cliente::findOrFail($id);
+
+        return response()->json($cliente);
+    }
 }
