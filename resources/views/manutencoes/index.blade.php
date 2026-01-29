@@ -562,9 +562,26 @@
                      '<"row"<"col-sm-12"tr>>' +
                      '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                 language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-BR.json',
+                    processing: "Processando...",
+                    search: "Pesquisar:",
+                    lengthMenu: "Exibir _MENU_ resultados por página",
+                    info: "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    infoEmpty: "Mostrando 0 até 0 de 0 registros",
+                    infoFiltered: "(filtrado de _MAX_ registros no total)",
+                    infoPostFix: "",
+                    loadingRecords: "Carregando...",
+                    zeroRecords: '<div class="text-center py-4"><i class="fas fa-search fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhum resultado encontrado</h5></div>',
                     emptyTable: '<div class="text-center py-4"><i class="fas fa-tools fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhuma manutencao encontrada</h5></div>',
-                    zeroRecords: '<div class="text-center py-4"><i class="fas fa-search fa-3x text-muted mb-3"></i><h5 class="text-muted">Nenhum resultado encontrado</h5></div>'
+                    paginate: {
+                        first: "Primeira",
+                        previous: "Anterior",
+                        next: "Próxima",
+                        last: "Última"
+                    },
+                    aria: {
+                        sortAscending: ": Ordenar colunas de forma ascendente",
+                        sortDescending: ": Ordenar colunas de forma descendente"
+                    }
                 }
             });
         });

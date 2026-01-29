@@ -13,8 +13,8 @@
                 <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-soft-light"></div>
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                 
-                <div class="relative p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="text-white space-y-2 text-center md:text-left z-10">
+                <div class="relative p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div class="text-white space-y-2 text-left z-10">
                         <h3 class="text-2xl font-black tracking-tight drop-shadow-sm">
                             Olá, {{ explode(' ', Auth::user()->name)[0] }}! 👋
                         </h3>

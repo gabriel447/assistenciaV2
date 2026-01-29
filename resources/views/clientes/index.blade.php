@@ -220,7 +220,26 @@
                 {data: 'acoes', name: 'acoes', orderable: false, searchable: false, className: 'text-center'}
             ],
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+                processing: "Processando...",
+                search: "Pesquisar:",
+                lengthMenu: "Exibir _MENU_ resultados por página",
+                info: "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                infoEmpty: "Mostrando 0 até 0 de 0 registros",
+                infoFiltered: "(filtrado de _MAX_ registros no total)",
+                infoPostFix: "",
+                loadingRecords: "Carregando...",
+                zeroRecords: "Nenhum registro encontrado",
+                emptyTable: "Nenhum registro encontrado",
+                paginate: {
+                    first: "Primeira",
+                    previous: "Anterior",
+                    next: "Próxima",
+                    last: "Última"
+                },
+                aria: {
+                    sortAscending: ": Ordenar colunas de forma ascendente",
+                    sortDescending: ": Ordenar colunas de forma descendente"
+                }
             },
             responsive: true,
             pageLength: 10,
