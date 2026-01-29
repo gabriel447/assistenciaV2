@@ -26,8 +26,13 @@ Route::get('/dashboard', function () {
     $clientesCount = \App\Models\Cliente::count();
     $manutencoesCount = \App\Models\Manutencao::count();
     $manutencoesPendentes = \App\Models\Manutencao::whereIn('status', ['aguardando', 'em_andamento', 'aguardando_pecas'])->count();
+    $manutencoesConcluidas = \App\Models\Manutencao::where('status', 'entregue')->count();
     
-    return view('dashboard', compact('clientesCount', 'manutencoesCount', 'manutencoesPendentes'));
+    // Totais de Mão de Obra e Peças (apenas serviços entregues)
+    $totalMaodeobra = \App\Models\Manutencao::where('status', 'entregue')->sum('valor_maodeobra');
+    $totalPecas = \App\Models\Manutencao::where('status', 'entregue')->sum('valor_pecas');
+
+    return view('dashboard', compact('clientesCount', 'manutencoesCount', 'manutencoesPendentes', 'manutencoesConcluidas', 'totalMaodeobra', 'totalPecas'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
