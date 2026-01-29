@@ -556,8 +556,22 @@
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],
                 order: [[4, 'asc']], // Ordenar por defeito
-                pageLength: 25,
+                pageLength: 10,
+                lengthMenu: [[10, 15, 20, 25, 50, -1], [10, 15, 20, 25, 50, "Todos"]],
                 responsive: true,
+                initComplete: function() {
+                    var api = this.api();
+                    function adjustPageLength() {
+                        var containerHeight = $(window).height() - 400; // Ajustado para Manutenções (mais header space)
+                        var rowHeight = 55; // Altura aproximada da linha com padding
+                        var newLength = Math.floor(containerHeight / rowHeight);
+                        if (newLength < 5) newLength = 5;
+                        api.page.len(newLength).draw();
+                    }
+                    // Ajustar ao carregar e ao redimensionar
+                    adjustPageLength();
+                    // $(window).on('resize', adjustPageLength); // Opcional: ajustar ao redimensionar
+                },
                 dom: '<"row"<"col-sm-12 col-md-6 text-left"f><"col-sm-12 col-md-6 text-right"l>>' +
                      '<"row"<"col-sm-12"tr>>' +
                      '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',

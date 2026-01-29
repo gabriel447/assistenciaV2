@@ -243,7 +243,19 @@
             },
             responsive: true,
             pageLength: 10,
-            lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+            lengthMenu: [[10, 15, 20, 25, 50, 100], [10, 15, 20, 25, 50, 100]],
+            initComplete: function() {
+                var api = this.api();
+                function adjustPageLength() {
+                    var containerHeight = $(window).height() - 350; // Aproximadamente header + footer + margens
+                    var rowHeight = 50; // Altura aproximada da linha
+                    var newLength = Math.floor(containerHeight / rowHeight);
+                    if (newLength < 5) newLength = 5;
+                    api.page.len(newLength).draw();
+                }
+                // Ajustar ao carregar
+                adjustPageLength();
+            },
             dom: '<"row"<"col-sm-12 col-md-6 text-left"f><"col-sm-12 col-md-6 text-right"l>>' +
                  '<"row"<"col-sm-12"tr>>' +
                  '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
