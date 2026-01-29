@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-gray-900 min-h-screen">
+    <div class="py-12 bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
             <!-- Hero Section -->
-            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-2xl overflow-hidden relative ring-1 ring-white/10">
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-xl overflow-hidden relative ring-1 ring-black/5">
                 <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-soft-light"></div>
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                 
                 <div class="relative p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="text-white space-y-3 text-center md:text-left z-10">
@@ -23,10 +23,10 @@
                         </p>
                     </div>
                     <div class="hidden md:block z-10">
-                        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-lg hover:bg-white/15 transition duration-300">
-                            <div class="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Data de Hoje</div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 shadow-lg hover:bg-white/15 transition duration-300">
+                            <div class="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Data de Hoje</div>
                             <div class="text-white text-3xl font-black tracking-tight">{{ now()->format('d/m') }}</div>
-                            <div class="text-blue-100 text-sm font-medium">{{ now()->translatedFormat('l') }}</div>
+                            <div class="text-blue-50 text-sm font-medium">{{ now()->translatedFormat('l') }}</div>
                         </div>
                     </div>
                 </div>
@@ -35,41 +35,41 @@
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Card Clientes -->
-                <div class="bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700 flex items-center gap-5 hover:shadow-xl hover:border-blue-500/30 transition-all duration-300 group">
-                    <div class="p-4 bg-gray-700 rounded-2xl text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5 hover:shadow-lg hover:border-blue-500/20 transition-all duration-300 group">
+                    <div class="p-4 bg-blue-50 rounded-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                         <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wide">Clientes</p>
-                        <p class="text-3xl font-black text-white">{{ $clientesCount ?? 0 }}</p>
+                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Clientes</p>
+                        <p class="text-3xl font-black text-gray-800">{{ $clientesCount ?? 0 }}</p>
                     </div>
                 </div>
 
                 <!-- Card Manutenções -->
-                <div class="bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700 flex items-center gap-5 hover:shadow-xl hover:border-green-500/30 transition-all duration-300 group">
-                    <div class="p-4 bg-gray-700 rounded-2xl text-green-400 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5 hover:shadow-lg hover:border-green-500/20 transition-all duration-300 group">
+                    <div class="p-4 bg-green-50 rounded-2xl text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                         <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wide">Total Serviços</p>
-                        <p class="text-3xl font-black text-white">{{ $manutencoesCount ?? 0 }}</p>
+                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Serviços</p>
+                        <p class="text-3xl font-black text-gray-800">{{ $manutencoesCount ?? 0 }}</p>
                     </div>
                 </div>
 
                 <!-- Card Pendentes -->
-                <div class="bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700 flex items-center gap-5 hover:shadow-xl hover:border-orange-500/30 transition-all duration-300 group">
-                    <div class="p-4 bg-gray-700 rounded-2xl text-orange-400 group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5 hover:shadow-lg hover:border-orange-500/20 transition-all duration-300 group">
+                    <div class="p-4 bg-orange-50 rounded-2xl text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
                         <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wide">Em Andamento</p>
-                        <p class="text-3xl font-black text-white">{{ $manutencoesPendentes ?? 0 }}</p>
+                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Em Andamento</p>
+                        <p class="text-3xl font-black text-gray-800">{{ $manutencoesPendentes ?? 0 }}</p>
                     </div>
                 </div>
             </div>
@@ -77,21 +77,21 @@
             <!-- Main Features Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Gerenciar Clientes -->
-                <a href="{{ route('clientes.index') }}" class="group bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-700 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 relative overflow-hidden">
+                <a href="{{ route('clientes.index') }}" class="group bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                        <svg class="w-48 h-48 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-48 h-48 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
                         </svg>
                     </div>
                     <div class="relative z-10">
-                        <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Clientes</h3>
-                        <p class="text-gray-400 mb-8 max-w-sm leading-relaxed">Cadastre novos clientes, visualize histórico completo e gerencie informações de contato com facilidade.</p>
-                        <span class="inline-flex items-center text-blue-400 font-bold group-hover:translate-x-2 transition-transform">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Clientes</h3>
+                        <p class="text-gray-500 mb-8 max-w-sm leading-relaxed">Cadastre novos clientes, visualize histórico completo e gerencie informações de contato com facilidade.</p>
+                        <span class="inline-flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform">
                             Acessar Clientes 
                             <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -101,22 +101,22 @@
                 </a>
 
                 <!-- Gerenciar Manutenções -->
-                <a href="{{ route('manutencoes.index') }}" class="group bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-700 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 relative overflow-hidden">
+                <a href="{{ route('manutencoes.index') }}" class="group bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/5 transition-all duration-300 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                        <svg class="w-48 h-48 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-48 h-48 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     <div class="relative z-10">
-                        <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center mb-6 text-green-400 group-hover:bg-green-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-all duration-300 shadow-sm">
                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">Manutenções</h3>
-                        <p class="text-gray-400 mb-8 max-w-sm leading-relaxed">Controle ordens de serviço, acompanhe status em tempo real e mantenha o histórico de reparos organizado.</p>
-                        <span class="inline-flex items-center text-green-400 font-bold group-hover:translate-x-2 transition-transform">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">Manutenções</h3>
+                        <p class="text-gray-500 mb-8 max-w-sm leading-relaxed">Controle ordens de serviço, acompanhe status em tempo real e mantenha o histórico de reparos organizado.</p>
+                        <span class="inline-flex items-center text-green-600 font-bold group-hover:translate-x-2 transition-transform">
                             Acessar Manutenções
                             <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -125,37 +125,6 @@
                     </div>
                 </a>
             </div>
-
-            <!-- Quick Actions -->
-            <div class="mt-8 border-t border-gray-800 pt-8">
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        Ações Rápidas
-                    </h3>
-                </div>
-                <div class="flex flex-wrap gap-4">
-                    <a href="{{ route('clientes.create') }}" class="group inline-flex items-center px-6 py-3 bg-gray-800 border border-gray-700 rounded-xl font-semibold text-gray-200 hover:bg-gray-700 hover:border-blue-500/50 transition-all shadow-sm">
-                        <div class="w-8 h-8 rounded-lg bg-blue-900/30 flex items-center justify-center mr-3 group-hover:bg-blue-900/50 transition-colors">
-                            <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                        Novo Cliente
-                    </a>
-                    <a href="{{ route('manutencoes.create') }}" class="group inline-flex items-center px-6 py-3 bg-gray-800 border border-gray-700 rounded-xl font-semibold text-gray-200 hover:bg-gray-700 hover:border-green-500/50 transition-all shadow-sm">
-                        <div class="w-8 h-8 rounded-lg bg-green-900/30 flex items-center justify-center mr-3 group-hover:bg-green-900/50 transition-colors">
-                            <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                        Nova Manutenção
-                    </a>
-                </div>
-            </div>
-
         </div>
     </div>
 </x-app-layout>
