@@ -23,7 +23,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $clientesCount = \App\Models\Cliente::count();
+    $manutencoesCount = \App\Models\Manutencao::count();
+    $manutencoesPendentes = \App\Models\Manutencao::whereIn('status', ['aguardando', 'em_andamento', 'aguardando_pecas'])->count();
+    
+    return view('dashboard', compact('clientesCount', 'manutencoesCount', 'manutencoesPendentes'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
